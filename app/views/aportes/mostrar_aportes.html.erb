@@ -1,0 +1,35 @@
+<h2 class='muted text-right'>Aportes realizados</h2>
+<% totales=Hash.new(0) %>
+
+<table class='table table-bordered table-hover'>
+  <tr class="warning">
+    <th>Nrocomprobante</th>
+    <th>Socio</th>
+    <th>MontoAporte</th>
+    <th>Montosolidaridad</th>
+    <th>Fecha del Aporte</th>
+    <th></th>
+
+  </tr>
+
+<% @aportes.each do |aporte| %>
+  <tr class="success">
+    <td><%= aporte.id %></td>
+    <td><%= aporte.socio.try(:nombre_completo) %></td>
+    <td><%= aporte.montomovimiento %></td>
+    <td><%= aporte.montosolidaridad %></td>
+    <td><%= aporte.created_at.strftime("%d/%m/%Y") %></td>
+    <td><%= link_to 'Modificar', edit_aporte_path(aporte), :class=>"btn"%></td>
+      </tr>
+  <% aporte.montomovimiento==nil ? '' : totales[:totalaportes]+=aporte.montomovimiento %>
+  <% aporte.montosolidaridad==nil ? '' : totales[:totalsolidaridad]+=aporte.montosolidaridad %>
+<% end %>
+</table>
+    <span class="label label-info"><h4>Total de Aportes:____________<%= formato_moneda totales[:totalaportes].round%></h4></span>
+    <br/><br/>
+    <span class="label label-info"><h4>Total de Solidaridad:__________<%= formato_moneda totales[:totalsolidaridad].round %></h4></span> 
+    <br><br>
+    <br />
+
+<p><%= link_to 'Nuevo Aporte', new_aporte_path(:socio_id=>params[:socio_id]), :class=>"btn btn-success" %>
+<%= link_to 'Atras', socios_path, :class=>'btn btn-info' %></p>

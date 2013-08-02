@@ -1,0 +1,37 @@
+<%= form_for(@prestamo) do |f| %>
+  <% if @prestamo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@prestamo.errors.count, "error") %> prohibited this prestamo from being saved:</h2>
+
+      <ul>
+      <% @prestamo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <span class="muted"><strong>Socio </strong></span><br />
+    <%= f.collection_select :socio_id, Socio.all, :id, :nombre_completo %>
+  </div>
+  <div class="field">
+    <span class="muted"><strong>Monto a prestar </strong></span><br />
+    <%= f.number_field :montoprestamo %>
+  </div>
+  <div class="field">
+    <span class="muted"><strong>Nro. de cuotas </strong></span><br />
+    <%= f.text_field :cantcuotas %>
+  </div>
+  <div class="field">
+    <span class="muted"><strong> Interes </strong></span><br />
+    <%= f.select :tasainteres, options_for_select([['12 %', 12], ['36 %', 36]])%>
+  </div>
+  <div class="field">
+    <span class="muted"><strong>Nro. de Comprobante</strong></span><br />
+    <%= f.number_field :id %>
+  </div>
+  
+  <hr>
+  <button type="submit" class="btn btn-primary">Registrar Operación</button>
+
+<% end %>

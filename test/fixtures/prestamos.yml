@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  montoprestamo: 1
+  cantcuotas: 
+  tasainteres: 1
+  nrocomprobante: 1
+
+two:
+  montoprestamo: 1
+  cantcuotas: 
+  tasainteres: 1
+  nrocomprobante: 1

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nrocomprobante: 1
+  monto: 1
+  montosolidaridad: 1
+  tipomovimiento: MyString
+
+two:
+  nrocomprobante: 1
+  monto: 1
+  montosolidaridad: 1
+  tipomovimiento: MyString

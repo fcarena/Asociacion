@@ -1,0 +1,33 @@
+<div>
+<h2 class="muted text-right">Socios registrados</h2>
+
+<table class="table table-bordered table-hover">
+  <tr class="warning">
+    <th>Nro. Socio</th>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Ci</th>
+    <th>Dependencia</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @socios.each do |socio| %>
+  <tr class="success">
+    <td><%= socio.id %></td>
+    <td><%= socio.nombre %></td>
+    <td><%= socio.apellido %></td>
+    <td><%= socio.ci %></td>
+    <td><%= socio.departament.try(:descripcion) %></td>
+    <td><%= link_to 'Modificar', edit_socio_path(socio), :class=>"btn"%></td>
+    <td><%= link_to 'Aportes', mostrar_aportes_path(:socio_id=>socio.id),:class=>"btn btn-inverse" %></td>
+    <td><%= link_to 'Prestamos', mostrar_prestamos_path(:socio_id=>socio.id),:class=>'btn  btn-primary' %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Socio', new_socio_path, :class=>"btn btn-success" %>
+</div>

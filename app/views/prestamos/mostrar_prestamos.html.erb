@@ -1,0 +1,36 @@
+<h2 class="muted text-right">Listado de Prestamos</h2>
+
+<table class="table table-bordered table-hover">
+  <tr class="warning">
+    <th>id</th>
+    <th>Socio</th>
+    <th>Monto Prestado</th>
+    <th>Nro.de Cuotas</th>
+    <th>% de Interes</th>
+    <th>Cuotas</th>
+    <th></th>
+    <th>Opcion</th>
+  </tr>
+
+<% @prestamos.each do |prestamo| %>
+  <tr class="success">
+    <td><%= prestamo.id %></td>
+    <td><%= prestamo.socio.try(:nombre_completo) %></td>
+    <td><%= prestamo.montoprestamo %></td>
+    <td><%= prestamo.cantcuotas %></td>
+    <td><%= prestamo.tasainteres %></td>
+    <td><%= link_to 'Pendientes', mostrarpendientes_path(:prestamo_id=>prestamo.id, :socio_id=>params[:socio_id]), :class=>"btn btn-primary" %></td>
+    <td><%= link_to 'Pagadas', mostrarpagadas_path(:prestamo_id=>prestamo.id, :socio_id=>params[:socio_id]), :class=>"btn btn-warning"  %></td>
+    <td><%= link_to 'Estado', refinanciar_path(:prestamo_id=>prestamo.id, :socio_id=>params[:socio_id]), :class=>"btn btn-inverse"  %></td>
+  </tr>
+<% end %>
+
+</table>
+
+<br />
+<br />
+<hr/>
+<br />
+
+<%= link_to 'Nuevo Prestamo', new_prestamo_path(:socio_id=>params[:socio_id]),:class=>"btn btn-success" %>
+<%= link_to 'Atras', socios_path, :class=>'btn btn-inverse' %>

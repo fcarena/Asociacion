@@ -1,0 +1,6 @@
+<h1>Editing loan_detail</h1>
+
+<%= render 'form' %>
+<% aux=@loan_detail.prestamo_id %>
+<%= link_to 'Show', @loan_detail %> |
+<%= link_to 'Back', mostrarpagadas_path(:prestamo_id=>aux) %>

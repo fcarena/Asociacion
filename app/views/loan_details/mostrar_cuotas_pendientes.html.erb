@@ -1,0 +1,44 @@
+<h2 class="muted text-right">Cuotas del Prestamo</h2>
+
+<% totales=Hash.new(0)  %>
+<table class="table table-bordered table-hover">
+  <tr class="warning">
+    <th>Cuota</th>
+    <th>Importe_Cuota</th>
+    <th>Amortización</th>
+    <th>Interes</th>
+    <th>Saldo</th>
+    <th>Fecha Vencimiento</th>
+    <th>E._Pago</th>
+    <th>Fecha_Pago</th>
+    <th></th>
+  </tr>
+<% @loan_details.each do |loan_detail| %>
+  <tr class="success">
+    <td><%= loan_detail.numerocuota %></td>
+    <td><%= loan_detail.montocuota.round %></td>
+    <td><%= loan_detail.amortizacion.round %></td>
+    <td><%= loan_detail.interes.round %></td>
+    <td><%= loan_detail.saldoactual > 0 ? loan_detail.saldoactual.round : 0 %></td>
+    <td><%= loan_detail.fechavcuota.strftime("%d-%m-%Y") %></td> 
+    <td><%= loan_detail.estado %></td>
+    <td><%= loan_detail.fechapago %></td>
+    <td><%= link_to 'Pagar Cuota', edit_loan_detail_path(loan_detail, :socio_id=>params[:socio_id], :prestamo_id=>params[:prestamo_id]), :class=>"btn btn-inverse"%></td>
+    <td><%= link_to 'Imprimir Comprobante', loan_detail, :class=>"btn btn-info" %></td>
+   
+  </tr>
+    <% totales[:montocuota]+=loan_detail.montocuota %>
+    <% totales[:amortizacion]+=loan_detail.amortizacion %>
+    <% totales[:interes]+=loan_detail.interes %>
+<% end %>
+<tr class="error">
+    <td style="background-color:#fff;"></td>
+    <td><%= formato_moneda totales[:montocuota].round  %></td>
+    <td><%= formato_moneda totales[:amortizacion].round %></td>
+    <td><%= formato_moneda totales[:interes].round %></td>
+    
+</tr>
+ </table>
+
+<br />
+<%= link_to 'Atras', mostrar_prestamos_path(:socio_id=>params[:socio_id]), :class=>'btn btn-info' %>

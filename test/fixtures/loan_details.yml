@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  montocuota: 1
+  fechavcuota: 2013-06-17 16:25:39
+  estado: false
+  fechapago: 2013-06-17 16:25:39
+
+two:
+  montocuota: 1
+  fechavcuota: 2013-06-17 16:25:39
+  estado: false
+  fechapago: 2013-06-17 16:25:39

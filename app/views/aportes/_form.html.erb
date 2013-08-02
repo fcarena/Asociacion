@@ -1,0 +1,31 @@
+<%= form_for(@aporte) do |f| %>
+  <% if @aporte.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@aporte.errors.count, "error") %> prohibited this aporte from being saved:</h2>
+
+      <ul>
+      <% @aporte.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="field">
+    <%= f.label "Datos del Socio" %><br />
+    <%= f.collection_select :socio_id, Socio.where(:id=>@aporte.socio_id), :id, :nombre_completo %>
+  </div>
+  <div class="field">
+    <%= f.label "Importe" %><br />
+    <%= f.number_field :montomovimiento %>
+  </div>
+  <div class="field">
+    <%= f.label "Solidaridad" %><br />
+    <%= f.number_field :montosolidaridad %>
+  </div>
+  <div class="field">
+    <%= f.label "Movimiento" %><br />
+    <%= f.select :tipomovimiento, options_for_select([['Aporte', 'Aporte'],['Extracción', 'Extracción']]) %>
+  </div>
+  <button class="btn btn-primary" type="submit">Registrar cambio</button>
+<% end %>

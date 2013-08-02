@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  prestamo_id: 
+  fechavcuota: 2013-06-17 16:11:06
+  montocuota: 1
+  fechapago: 2013-06-17 16:11:06
+  estado: false
+  montointeres: 1
+
+two:
+  prestamo_id: 
+  fechavcuota: 2013-06-17 16:11:06
+  montocuota: 1
+  fechapago: 2013-06-17 16:11:06
+  estado: false
+  montointeres: 1

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table table-bordered">
+	<tr>
+		<th>Datos del Socio</th>
+		<th>Cuota</th>
+		<th>Amortización</th>
+		<th>Interes</th>
+		<th>Monto a Pagar</th>
+	</tr>
+		<td><%= @loan_detail.prestamo.socio.try(:nombre_completo) %></td>
+		<td> <%= @loan_detail.id %> / <%= @loan_detail.prestamo.try(:cantcuotas) %></td>
+		<td><%= formato_moneda @loan_detail.amortizacion %></td>
+		<td><%= formato_moneda @loan_detail.interes %></td>
+		<td><%= formato_moneda @loan_detail.montocuota %></td>
+</table>
+
+<% aux=@loan_detail.prestamo_id %>
+<br>
+<br>
+<br>
+<br>
+<br>
+<%= link_to 'Atrás', mostrarpagadas_path(:prestamo_id=>aux) %>

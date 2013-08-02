@@ -1,0 +1,44 @@
+<h2 class="muted text-right">Refinanciar Prestamo</h2>
+
+<% totales=Hash.new(0)  %>
+<table class="table table-bordered table-hover">
+  <tr class="warning">
+    <th>Cuota</th>
+    <th>Importe_Cuota</th>
+    <th>Amortización</th>
+    <th>Interes</th>
+    <th>Saldo</th>
+    <th>Fecha Vencimiento</th>
+    <th>E._Pago</th>
+    <th>Fecha_Pago</th>
+  </tr>
+<% @loan_details.each do |loan_detail| %>
+  <tr class="success">
+    <td><%= loan_detail.id %></td>
+    <td><%= loan_detail.montocuota.round %></td>
+    <td><%= loan_detail.amortizacion.round %></td>
+    <td><%= loan_detail.interes %></td>
+    <td><%= loan_detail.saldoactual > 0 ? loan_detail.saldoactual.round : 0 %></td>
+    <td><%= loan_detail.fechavcuota.strftime("%d-%m-%Y") %></td> 
+    <td><%= loan_detail.estado %></td>
+    <td><%= loan_detail.estado=='Pagado' ? loan_detail.fechapago.strftime("%d-%m-%Y") : loan_detail.fechapago %></td>
+  </tr>
+    <% loan_detail.estado=='.' ? totales[:montopendiente]+=loan_detail.amortizacion : '' %>
+    <% totales[:montocuota]+=loan_detail.montocuota %>
+    <% totales[:amortizacion]+=loan_detail.amortizacion %>
+    <% totales[:interes]+=loan_detail.interes %>
+<% end %>
+<tr class="error">
+    <td style="background-color:#fff;"></td>
+    <td><%= formato_moneda totales[:montocuota].round  %></td>
+    <td><%= formato_moneda totales[:amortizacion].round %></td>
+    <td><%= formato_moneda totales[:interes].round %></td>   
+</tr>
+ </table>
+<hr>
+<hr>    
+  
+    <span class="label label-info"><h4>Amortización abonada:____<%= formato_moneda totales[:amortizacion].round-totales[:montopendiente].round %></h4></span><br/><br/>
+    <span class="label label-info"><h4>Total Pendiente:__________<%= formato_moneda totales[:montopendiente].round %></h4></span> <br>
+    <%= link_to 'lalala', prestamos_path(id: params[:prestamo_id], monto: totales[:montopendiente].round) %>
+    <%= link_to 'Atras', mostrar_prestamos_path(:socio_id=>params[:socio_id]), :class=>'btn btn-info' %>      

@@ -1,0 +1,47 @@
+<%= form_for(@socio) do |f| %>
+  <% if @socio.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@socio.errors.count, "error") %> prohibited this socio from being saved:</h2>
+
+      <ul>
+      <% @socio.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <span class="muted"><strong>Nombre </strong></span><br />
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <span class="muted"><strong>Apellido </strong></span><br />
+    <%= f.text_field :apellido %>
+  </div>
+  <div class="field">
+    <span class="muted"><strong>Nro. de C.I.</strong></span><br />
+    <%= f.text_field :ci %>
+  </div>
+  <div class="field">
+    <span class="muted"><strong>Tel: </strong></span><br />
+    <%= f.telephone_field :tel %>
+  </div>
+  <div class="field">
+    <span class="muted"><strong>Dirección: </strong></span><br />
+    <%= f.text_field :direccion %>
+  </div>
+  <div class="field">
+    <span class="muted"><strong>Tipo </strong></span><br />
+    <%= f.select :tipo, options_for_select([['Vitalicio', 'v'],['Prestamista', 'p']]) %>
+  </div>
+  <div class="field">
+    <span class="muted"><strong>Dependencia </strong></span><br />
+    <%= f.collection_select :departament_id, Departament.all, :id, :descripcion %>  
+  </div>  
+  <div class="field">
+    <span class="muted"><strong>Correo </strong></span><br />
+    <%= f.email_field :correo %>
+  </div>
+  <button class="btn btn-primary" type="submit">Registrar como socio</button>
+
+<% end %>
