@@ -13,7 +13,7 @@
 
     <div class="field">
     <%= f.label "Datos del Socio" %><br />
-    <%= f.collection_select :socio_id, Socio.where(:id=>@aporte.socio_id), :id, :nombre_completo %>
+    <%= f.collection_select :socio_id, Socio.where(:id=>params[:socio_id]), :id, :nombre_completo %>
   </div>
   <div class="field">
     <%= f.label "Importe" %><br />
